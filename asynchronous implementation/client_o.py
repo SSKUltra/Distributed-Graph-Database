@@ -31,12 +31,13 @@ with xmlrpc.client.ServerProxy("http://192.168.1.103:8000/") as proxy:
 		
 		l = input("Enter label name: ")
 
-		graph = proxy.add_edge_dst(u,l,v)
+		graph, count = proxy.add_edge_dst(u,l,v)
 
 		# print(generate_edges(graph)) 
 		i = i + 1
 
 	print(graph)
+	print("Number of Messages : " + count)
 	edge_representation = generate_edges(graph)
 	print(edge_representation)
 
@@ -67,5 +68,5 @@ with xmlrpc.client.ServerProxy("http://192.168.1.103:8000/") as proxy:
 	nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'), node_color = values, node_size = 500)
 	nx.draw_networkx_labels(G, pos)
 	nx.draw_networkx_edges(G, pos, edgelist=red_edges, edge_color='r', arrows=True)
-	nx.draw_networkx_edges(G, pos, edgelist=black_edges, arrows=False)
+	nx.draw_networkx_edges(G, pos, edgelist=black_edges, arrows=True)
 	plt.show()
